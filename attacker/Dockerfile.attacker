@@ -1,0 +1,24 @@
+FROM python:3.10-slim-bullseye
+
+ARG USERNAME=attacker
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+LABEL maintainer="64J0"
+LABEL version="0.0.1"
+LABEL description="This container will host the attacker script."
+
+WORKDIR /app
+
+# Add a non-root user, so later we can explore methods to scale
+# privileges within this container.
+# https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user#_creating-a-nonroot-user
+RUN groupadd --gid $USER_GID $USERNAME
+RUN useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
+RUN chown -R $USERNAME /app
+
+COPY --chown=$USERNAME server.py .
+
+USER $USERNAME
+
+CMD ["python", "./server.py"]

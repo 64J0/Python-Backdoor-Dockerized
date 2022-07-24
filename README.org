@@ -1,0 +1,58 @@
+#+TITLE: Dockerized Python Backdoor
+#+AUTHOR: 64J0
+#+DATE: [2022-07-24 dom]
+
+This project is a continuation idea for the backdoor project implemented during
+the *Complete Ethical Hacking Bootcamp 2022: Zero to Mastery* Udemy course.
+
+The main addition is the dockerization of the project, letting it run in a very
+lightweight environment composed basically of Docker containers. During the
+development of this project, I'm also getting more acquainted with Docker
+internal configuration, especially related to the network.
+
+Versions tested:
+
++ Docker version ~20.10.17~
++ docker-compose version ~1.29.1~
+
+** [WIP] How to run it?
+
+At the moment I was not able to make this project work by throwing just a single
+command ~docker-compose up~. But I'm already studying and testing some
+alternatives.
+
+With this in mind, consider applying the following flow:
+
+#+begin_src bash
+  # First, start the attacker container.
+  # You must use the docker-compose command so it will set up the
+  # network configuration automatically.
+  docker-compose run --entrypoint="bash" attacker
+  # In the shell open, run the python command:
+  # python server.py
+  #
+  # Here you'll be able to run commands executed in the target
+  # environment.
+  # Notice that it takes 20 seconds before the target tries to connect
+  # to the attacker.
+
+  # ====================================
+  # In a different shell, start the target container if it's not running
+  # yet.
+  # docker-compose up target
+
+  # ====================================
+  # Kill everything:
+  # docker-compose down
+#+end_src
+
+*** Example
+
+#+CAPTION: Example of commands running from the attacker container to the target container
+#+NAME: example.jpg
+[[./assets/example.jpg]]
+
+** Legal
+
+Notice that I created this project for personal educational purposes only, and
+I'm not responsible for its misusage, or for enhanced variants created.
