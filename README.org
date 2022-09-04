@@ -15,13 +15,10 @@ Versions tested:
 + Docker version ~20.10.17~
 + docker-compose version ~1.29.1~
 
-** [WIP] How to run it?
+** How to run it?
 
-At the moment I was not able to make this project work by throwing just a single
-command ~docker-compose up~. But I'm already studying and testing some
-alternatives.
-
-With this in mind, consider applying the following flow:
+If you have the required tools installed, you can run this project with the
+following commands:
 
 #+begin_src bash
   # First, start the attacker container.
@@ -29,7 +26,7 @@ With this in mind, consider applying the following flow:
   # network configuration automatically.
   docker-compose run --entrypoint="bash" attacker
   # In the shell open, run the python command:
-  # python server.py
+  python server.py
   #
   # Here you'll be able to run commands executed in the target
   # environment.
@@ -39,7 +36,7 @@ With this in mind, consider applying the following flow:
   # ====================================
   # In a different shell, start the target container if it's not running
   # yet.
-  # docker-compose up target
+  docker-compose up target
 
   # ====================================
   # Kill everything:

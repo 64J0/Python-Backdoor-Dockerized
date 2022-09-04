@@ -8,9 +8,7 @@ services:
     networks:
       internal-network:
         ipv4_address: "10.0.45.15"
-    depends_on:
-      - target
-      
+
   target:
     image: python-backdoor-target:0.0.1
     build:
@@ -19,7 +17,7 @@ services:
     networks:
       internal-network:
         ipv4_address: "10.0.45.16"
-      
+
 networks:
   internal-network:
     ipam:
